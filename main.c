@@ -10,41 +10,29 @@
 #define FLASHCARDS_TO_LOAD 100
 
 int main(int argc, char* argv[]){
-    FILE * cards;
-    char * line;
-    size_t len = 0;
-    ssize_t readline;
-    struct flashcard* flashcards[FLASHCARDS_TO_LOAD];
-    int loadedFlashcards = 0;
-    char **cardLine;
 
     if(argc != 2){
-        printf("Please chose an input file\n");
+        fprintf(stderr,"ERROR: no file specified\n");
         exit(EXIT_FAILURE);
     }
 
+    FILE * cards; //The file that contains the flashcards
     cards = fopen(argv[1], "r");
-    if (cards == NULL)
+    if (cards == NULL){
+	    fprintf(stderr,"ERROR: Could not open file %s\n",argv[1]);
         exit(EXIT_FAILURE);
+	}
 
-    while ((( readline = getline(&line, &len, cards)) != -1) && (loadedFlashcards < FLASHCARDS_TO_LOAD)){
-        if(line[0] == '#') continue;
-        struct flashcard* flash = malloc(sizeof(struct flashcard));
-        cardLine = parse_csv(line);
-        flash->front = cardLine[0];
-        flash->back = cardLine[1];
-        flash->repetitions = strtoumax(cardLine[2], NULL, 10);
-        free(cardLine[2]);
-        flash->easinessFactor = strtof(cardLine[3], NULL);
-        free(cardLine[3]);
-        flash->dueDay = strtoumax(cardLine[4], NULL, 10);
-        free(cardLine[4]);
-        flashcards[loadedFlashcards] = flash;
-        loadedFlashcards++;
-    }
-    free(line);
+    struct flashcard* flashcards[FLASHCARDS_TO_LOAD]; //flashcards in memory
+
+	int loadedFlashcards = csv_to_flashcard(cards, flashcards, FLASHCARDS_TO_LOAD);
+
+	if(loadedFlashcards < 1){
+			fprintf(stderr,"ERROR: No flashcards loaded");
+			exit(EXIT_FAILURE);
+	}
+
     fclose(cards);
-
 
     char c = '\n';
     int throwaway;
@@ -97,3 +85,4 @@ int main(int argc, char* argv[]){
     printf("\n");
     exit(EXIT_SUCCESS);
 }
+
