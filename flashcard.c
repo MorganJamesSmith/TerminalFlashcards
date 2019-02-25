@@ -1,3 +1,4 @@
+#include "flashcard.h"
 /* Flashcard spaced repetitions algorithim (SM2)
 Score:
     5 - perfect response
@@ -9,7 +10,7 @@ Score:
 */
 
 int repetitionInterval(float easinessFactor, int repetitions, int score){
-    if(easinessFactor == 0) easinessFactor = 2.5;
+    if(easinessFactor < 1.3) easinessFactor = 2.5;
     if(score < 3) return 0;
     int interval = 1;
     if(repetitions == 2) interval = 6;
@@ -18,7 +19,7 @@ int repetitionInterval(float easinessFactor, int repetitions, int score){
 }
 
 float newEasinessFactor(float oldEasinessFactor, int score){
-    if(oldEasinessFactor == 0) return 2.5;
+    if(oldEasinessFactor < 1.3) return 2.5;
     float easinessFactor = (oldEasinessFactor)+(0.1-(5-score)*(0.08+(5-score)*0.02));
     if(easinessFactor < 1.3)
         easinessFactor = 1.3;

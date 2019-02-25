@@ -28,12 +28,12 @@ int csv_to_flashcard(FILE *csv, struct flashcard* flashcards[], int flashcardsTo
         flashcards[loadedFlashcards] = flash;
         loadedFlashcards++;
     }
-	if(loadedFlashcards == 0){
-			fprintf(stderr,"ERROR: file is empty\n");
-			exit(EXIT_FAILURE);
-	}
+    if(loadedFlashcards == 0){
+            fprintf(stderr,"ERROR: file is empty\n");
+            exit(EXIT_FAILURE);
+    }
     free(line);
-	return loadedFlashcards;
+    return loadedFlashcards;
 }
 void free_csv_line(char **parsed)
 {

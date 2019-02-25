@@ -16,21 +16,21 @@ int main(int argc, char* argv[]){
         exit(EXIT_FAILURE);
     }
 
-    FILE * cards; //The file that contains the flashcards
+    FILE * cards;
     cards = fopen(argv[1], "r");
     if (cards == NULL){
-	    fprintf(stderr,"ERROR: Could not open file %s\n",argv[1]);
+        fprintf(stderr,"ERROR: Could not open file %s\n",argv[1]);
         exit(EXIT_FAILURE);
-	}
+    }
 
     struct flashcard* flashcards[FLASHCARDS_TO_LOAD]; //flashcards in memory
 
-	int loadedFlashcards = csv_to_flashcard(cards, flashcards, FLASHCARDS_TO_LOAD);
+    int loadedFlashcards = csv_to_flashcard(cards, flashcards, FLASHCARDS_TO_LOAD);
 
-	if(loadedFlashcards < 1){
-			fprintf(stderr,"ERROR: No flashcards loaded");
-			exit(EXIT_FAILURE);
-	}
+    if(loadedFlashcards < 1){
+            fprintf(stderr,"ERROR: No flashcards loaded");
+            exit(EXIT_FAILURE);
+    }
 
     fclose(cards);
 

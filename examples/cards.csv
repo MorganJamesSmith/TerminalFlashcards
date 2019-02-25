@@ -1,0 +1,86 @@
+"What is the formula for angular frequency?","ω=2πf",0,0,0
+"What is the formula for capacitor impedence?","Rc=1/(jωC)",0,0,0
+"What is the formula for inductor impedence?","RL=1/(jωL)",0,0,0
+"What is the speed of light?","299 792 458 m/s",0,0,0
+"What is sin(0°)?",0,0,0,0
+"What is sin(30°)?","1/2",0,0,0
+"What is sin(45°)?","1/√2 or √2/2",0,0,0
+"What is sin(60°)?","√3/2",0,0,0
+"What is sin(90°)?","1",0,0,0
+"What is cos(0°)?","1",0,0,0
+"What is cos(30°)?","√3/2",0,0,0
+"What is cos(45°)?","1/√2 or √2/2",0,0,0
+"What is cos(60°)?","1/2",0,0,0
+"What is cos(90°)?",0,0,0,0
+"What is tan(0°)?",0,0,0,0
+"What is tan(30°)?","√3/3",0,0,0
+"What is tan(45°)?","1",0,0,0
+"What is tan(60°)?","√3",0,0,0
+"What is tan(90°)?","Undefined",0,0,0
+"What is tan?","sin/cos",0,0,0
+"What is csc?","1/sin",0,0,0
+"What is sec?","1/cos",0,0,0
+"What is cot?","1/tan",0,0,0
+"cos(-θ)","cos(θ)",0,0,0
+"cos(90-θ)","sin(θ)",0,0,0
+"sin(-θ)","-sin(θ)",0,0,0
+"sin(90-θ)","cos(θ)",0,0,0
+"tan(-θ)","-tan(θ)",0,0,0
+"sin^2θ+cos^2θ = ?","1",0,0,0
+"sin(2θ)","2sinθcosθ or 2tanθ/(1+tan^{2}θ)",0,0,0
+"sin(x + y)","sin(x)cos(y) + cos(x)sin(y)",0,0,0
+"sin(x - y)","sin(x)cos(y) - cos(x)sin(y)",0,0,0
+"cos(2θ)","cos^2θ-sin^2θ or 2cos^2θ-1 or 1-2sin^2θ or (1-tan^2θ)/(1+tan^2θ)",0,0,0
+"cos(x + y)","cos(x)cos(y)-sin(x)sin(y)",0,0,0
+"cos(x - y)","cos(x)cos(y)+sin(x)sin(y)",0,0,0
+"cos^2(x), in terms of cos(2x)","(1+cos(2x))/2",0,0,0
+"tan(2θ)","2tanθ/(1-tan^{2}θ)",0,0,0
+"tan(x + y)","(tan(x)+tan(y))/(1-tan(x)tan(y))",0,0,0
+"tan(x - y)","(tan(x)-tan(y))/(1+tan(x)tan(y))",0,0,0
+"sin(θ/2)","±√((1-cosθ)/2), NOTE: it will be either + or -, not both",0,0,0
+"cos(θ/2)","±√((1+cosθ)/2), NOTE: it will be either + or -, not both",0,0,0
+"ℒ{f(t)}","∫_{0}^{∞}f(t)e^{-st}dt",0,0,0
+"ℒ{f(t)","(t)} = [ℒ{f(t)} + ℒ{g(t)}",0,0,0
+"ℒ{cf(t)}, c is a constant","cℒ{f(t)",0,0,0
+"ℒ{e^{at}f(t)}","ℒ{f(t)}|_{s→(s-a)}",0,0,0
+"ℒ{1}","1/s",0,0,0
+"ℒ{t}","1/s^2",0,0,0
+"ℒ{e^{at}}","1/(s-a)",0,0,0
+"ℒ{t^{n}}, n = 1,2,3...","n!/s^{n+1}",0,0,0
+"ℒ{t^{p}}, p > -1","Γ(p+1)/s^{p+1}",0,0,0
+"ℒ{sin(at)}","a/(a^2+s^2)",0,0,0
+"ℒ{cos(at)}","s/(a^2+s^2)",0,0,0
+"10^24","Yotta",0,0,0
+"10^21","Zetta",0,0,0
+"10^18","Exa",0,0,0
+"10^15","Peta",0,0,0
+"10^12","Tera",0,0,0
+"10^9","Giga",0,0,0
+"10^6","Mega",0,0,0
+"10^3","Kilo",0,0,0
+"10^2","Hecto",0,0,0
+"10^1","Deca",0,0,0
+"10^-1","Deci",0,0,0
+"10^-2","Centi",0,0,0
+"10^-3","Milli",0,0,0
+"10^-6","Micro",0,0,0
+"10^-9","Nano",0,0,0
+"10^-12","Pico",0,0,0
+"10^-15","Femto",0,0,0
+"10^-18","Atto",0,0,0
+"10^-21","Zepto",0,0,0
+"10^-24","Yocto",0,0,0
+"What's the C placeholder for an integer?","%d",0,0,0
+"What's the C placeholder for a character?","%c",0,0,0
+"What's the C placeholder for a string?","%s",0,0,0
+"What's the C placeholder for a float formated to # digits?","%.#f",0,0,0
+"What's the C operator for bitwise AND?","&",0,0,0
+"What's the C operator for bitwise OR?","|",0,0,0
+"What's the C operator for bitwise XOR?","^",0,0,0
+"What's the C operator for bitwise left shift?","<<",0,0,0
+"What's the C operator for bitwise right shift?",">>",0,0,0
+"What's the C operator for bitwise NOT?","~",0,0,0
+"What's Freedom 0 of free software?","The freedom to run the program as you wish, for any purpose",0,0,0
+"What's Freedom 1 of free software?","The freedom to study how the program works, and change it so it does your computing as you wish. Access to the source code is a precondition for this.",0,0,0
+"What's Freedom 2 of free software?","The freedom to redistribute copies so you can help others (freedom 2).",0,0,0
+"What's Freedom 3 of free software?","The freedom to distribute copies of your modified versions to others (freedom 3). By doing this you can give the whole community a chance to benefit from your changes. Access to the source code is a precondition for this.",0,0,0
