@@ -10,22 +10,37 @@
 #define FLASHCARDS_TO_LOAD 100
 
 void save_and_quit(char filename[], struct flashcard flashcards[], int loadedFlashcards){
+    struct timespec start,end;
     printf("\n\nSaving your progress!\n");
+    clock_gettime(CLOCK_REALTIME,&start);
     mkdir("backup", (mode_t) 0755);
     char backup[100];
-    sprintf(backup,"backup/%lu-%s",time(NULL),filename);
+    sprintf(backup,"backup/%lu-%s",start.tv_sec,filename);
 
     printf("Moving file %s to %s\n", filename, backup);
     rename(filename,backup);
 
     printf("Creating new file %s\n", filename);
     FILE* newfile = fopen(filename,"w");
+    printf("Populating new file %s\n", filename);
     for(int i = 0; i < loadedFlashcards; i++){
         fprintf(newfile,"\"%s\",\"%s\",%d,%f,%d\n",flashcards[i].front,flashcards[i].back,flashcards[i].repetitions,flashcards[i].easinessFactor,flashcards[i].dueDay);
     }
     fclose(newfile);
-    printf("File created\n\n");
+    printf("File %s created\n\n", filename);
+    clock_gettime(CLOCK_REALTIME,&end);
+    printf("Saving took %ld seconds and %ld nanoseconds\n\n", end.tv_sec - start.tv_sec,end.tv_nsec-start.tv_nsec);
     exit(EXIT_SUCCESS);
+
+}
+
+void print_user_stats(time_t start, time_t end, int score_histogram[]){
+    printf("\n\nYou spent %ld seconds on your flashcards\n\n", end - start);
+    printf("Question Scores:\n\n");
+    for(int i = 0; i < 6; i++){
+        printf("You answered %d question(s) with a score of %d!\n",score_histogram[i],i);
+    }
+
 
 }
 
@@ -37,6 +52,8 @@ int main(int argc, char* argv[]){
     }
 
     FILE * cards;
+    time_t start_time, end_time;
+    int score_histogram[] = {0,0,0,0,0,0};
     cards = fopen(argv[1], "r");
     if (cards == NULL){
         fprintf(stderr,"ERROR: Could not open file %s\n",argv[1]);
@@ -45,14 +62,19 @@ int main(int argc, char* argv[]){
 
     struct flashcard flashcards[FLASHCARDS_TO_LOAD]; //flashcards in memory
 
+    printf("Loading flashcards!\n");
+    struct timespec start_loading,finished_loading;
+    clock_gettime(CLOCK_REALTIME,&start_loading);
     int loadedFlashcards = csv_to_flashcard(cards, flashcards, FLASHCARDS_TO_LOAD);
-
     if(loadedFlashcards < 1){
-            fprintf(stderr,"ERROR: No flashcards loaded");
+            fprintf(stderr,"ERROR: No flashcards loaded\n");
             exit(EXIT_FAILURE);
     }
-
     fclose(cards);
+    clock_gettime(CLOCK_REALTIME,&finished_loading);
+    printf("Flashcards loaded in %ld seconds and %ld nanoseconds\n",finished_loading.tv_sec-start_loading.tv_sec,finished_loading.tv_nsec-start_loading.tv_nsec);
+
+    start_time = time(NULL);
 
     char c = '\n';
     int throwaway;
@@ -65,8 +87,11 @@ int main(int argc, char* argv[]){
                 printf("%s\n",flashcards[i].front);
                 printf("Your guess: ");
                 while((throwaway = getchar()) != '\n' && throwaway != EOF);
-                if(throwaway == EOF)
+                if(throwaway == EOF){
+                    end_time = time(NULL);
+                    print_user_stats(start_time,end_time,score_histogram);
                     save_and_quit(argv[1],flashcards,loadedFlashcards);
+                }
                 printf("The answer was: %s\n",flashcards[i].back);
                 do{
                     printf("How did you do (0-5): ");
@@ -74,9 +99,13 @@ int main(int argc, char* argv[]){
                     c = getchar();
                     while(c == ' ' || c == '\t') c = getchar(); //get rid of leading whitespace
                     if(c != '\n') while((throwaway = getchar()) != '\n' && throwaway != EOF); //clean up stdin
-                    if(c == EOF)
+                    if(c == EOF){
+                        end_time = time(NULL);
+                        print_user_stats(start_time, end_time, score_histogram);
                         save_and_quit(argv[1],flashcards,loadedFlashcards);
+                    }
                 }while(c < '0' || c > '5');
+                score_histogram[c-'0']++;
                 flashcards[i].dueDay = today + repetitionInterval(flashcards[i].easinessFactor, flashcards[i].repetitions, c - '0');
                 if(c < '3'){
                     flashcards[i].repetitions = 0;
@@ -96,6 +125,8 @@ int main(int argc, char* argv[]){
         }
     }while(repeat);
 
+    end_time = time(NULL);
+    print_user_stats(start_time, end_time, score_histogram);
     save_and_quit(argv[1],flashcards,loadedFlashcards);
 }
 
