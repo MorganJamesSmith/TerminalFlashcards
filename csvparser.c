@@ -5,7 +5,7 @@
 #include "flashcard.h"
 #include "csvparser.h"
 
-int csv_to_flashcard(FILE *csv, struct flashcard* flashcards[], int flashcardsToLoad){
+int csv_to_flashcard(FILE *csv, struct flashcard flashcards[], int flashcardsToLoad){
 
     char * line; //Stores the line currently being read
     char **lineItems; //parsed line into a list of strings
@@ -15,15 +15,19 @@ int csv_to_flashcard(FILE *csv, struct flashcard* flashcards[], int flashcardsTo
 
 
     while ((( readline = getline(&line, &len, csv)) != -1) && (loadedFlashcards < flashcardsToLoad)){
-        struct flashcard* flash = malloc(sizeof(struct flashcard));
+        struct flashcard flash;
         lineItems = parse_csv(line);
-        flash->front = lineItems[0];
-        flash->back = lineItems[1];
-        flash->repetitions = strtoumax(lineItems[2], NULL, 10);
+        if(lineItems == NULL){
+            fprintf(stderr, "ERROR: couldn't parse line:\n%s\n",line);
+            continue;
+        }
+        flash.front = lineItems[0];
+        flash.back = lineItems[1];
+        flash.repetitions = strtoumax(lineItems[2], NULL, 10);
         free(lineItems[2]);
-        flash->easinessFactor = strtof(lineItems[3], NULL);
+        flash.easinessFactor = strtof(lineItems[3], NULL);
         free(lineItems[3]);
-        flash->dueDay = strtoumax(lineItems[4], NULL, 10);
+        flash.dueDay = strtoumax(lineItems[4], NULL, 10);
         free(lineItems[4]);
         flashcards[loadedFlashcards] = flash;
         loadedFlashcards++;
@@ -54,8 +58,9 @@ static int count_fields(const char *line)
                 if (ptr[1] == '\"'){
                     ptr++;
                     continue;
-                }
+                } else {
                 fQuote = 0;
+                }
             }
             continue;
         }

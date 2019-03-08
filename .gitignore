@@ -1,3 +1,6 @@
 *.csv
+*.o
+*.out
+main
 backup
 !examples/*

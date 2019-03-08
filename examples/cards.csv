@@ -1,6 +1,6 @@
 "What is the formula for angular frequency?","ω=2πf",0,0,0
 "What is the formula for capacitor impedence?","Rc=1/(jωC)",0,0,0
-"What is the formula for inductor impedence?","RL=1/(jωL)",0,0,0
+"What is the formula for inductor impedence?","RL=jωL",0,0,0
 "What is the speed of light?","299 792 458 m/s",0,0,0
 "What is sin(0°)?",0,0,0,0
 "What is sin(30°)?","1/2",0,0,0
