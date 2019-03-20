@@ -50,26 +50,26 @@
 "ℒ{t^{p}}, p > -1","Γ(p+1)/s^{p+1}",0,0,0
 "ℒ{sin(at)}","a/(a^2+s^2)",0,0,0
 "ℒ{cos(at)}","s/(a^2+s^2)",0,0,0
-"10^24","Yotta",0,0,0
-"10^21","Zetta",0,0,0
-"10^18","Exa",0,0,0
-"10^15","Peta",0,0,0
-"10^12","Tera",0,0,0
-"10^9","Giga",0,0,0
-"10^6","Mega",0,0,0
-"10^3","Kilo",0,0,0
-"10^2","Hecto",0,0,0
-"10^1","Deca",0,0,0
-"10^-1","Deci",0,0,0
-"10^-2","Centi",0,0,0
-"10^-3","Milli",0,0,0
-"10^-6","Micro",0,0,0
-"10^-9","Nano",0,0,0
-"10^-12","Pico",0,0,0
-"10^-15","Femto",0,0,0
-"10^-18","Atto",0,0,0
-"10^-21","Zepto",0,0,0
-"10^-24","Yocto",0,0,0
+"What does the metric prefix Yotta stand for?","10^24",0,0.000000,0
+"What does the metric prefix Zetta stand for?","10^21",0,0.000000,0
+"What does the metric prefix Exa stand for?","10^18",0,0.000000,0
+"What does the metric prefix Peta stand for?","10^15",0,0.000000,0
+"What does the metric prefix Tera stand for?","10^12",0,0.000000,0
+"What does the metric prefix Giga stand for?","10^9",0,0.000000,0
+"What does the metric prefix Mega stand for?","10^6",0,0.000000,0
+"What does the metric prefix Kilo stand for?","10^3",0,0.000000,0
+"What does the metric prefix Hecto stand for?","10^2",0,0.000000,0
+"What does the metric prefix Deca stand for?","10^1",0,0.000000,0
+"What does the metric prefix Deci stand for?","10^-1",0,0.000000,0
+"What does the metric prefix Centi stand for?","10^-2",0,0.000000,0
+"What does the metric prefix Milli stand for?","10^-3",0,0.000000,0
+"What does the metric prefix Micro stand for?","10^-6",0,0.000000,0
+"What does the metric prefix Nano stand for?","10^-9",0,0.000000,0
+"What does the metric prefix Pico stand for?","10^-12",0,0.000000,0
+"What does the metric prefix Femto stand for?","10^-15",0,0.000000,0
+"What does the metric prefix Atto stand for?","10^-18",0,0.000000,0
+"What does the metric prefix Zepto stand for?","10^-21",0,0.000000,0
+"What does the metric prefix Yocto stand for?","10^-24",0,0.000000,0
 "What's the C placeholder for an integer?","%d",0,0,0
 "What's the C placeholder for a character?","%c",0,0,0
 "What's the C placeholder for a string?","%s",0,0,0

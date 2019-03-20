@@ -9,6 +9,14 @@
 #include "csvparser.h"
 #define FLASHCARDS_TO_LOAD 100
 
+unsigned gcd(unsigned a, unsigned b)
+{
+    if (b)
+        return gcd(b, a % b);
+    else
+    return a;
+}
+
 void save_and_quit(char filename[], struct flashcard flashcards[], int loadedFlashcards){
     struct timespec start,end;
     printf("\n\nSaving your progress!\n");
@@ -80,9 +88,19 @@ int main(int argc, char* argv[]){
     int throwaway;
     int repeat = 0;
     int today = ((unsigned long)time(NULL))/86400; //unix time in days
+    int increment;
+    int i = 0;
     do{
+
+        do{
+            increment = rand() % loadedFlashcards;
+        }while(gcd(loadedFlashcards, increment) != 1);
+
         repeat = 0;
-        for(int i = 0; i < loadedFlashcards; i++){
+        for(int k = 0; k < loadedFlashcards; k++){
+            i += increment;
+            if(i > loadedFlashcards)
+                i -= loadedFlashcards;
             if(flashcards[i].dueDay <= today){
                 printf("%s\n",flashcards[i].front);
                 printf("Your guess: ");
@@ -96,8 +114,9 @@ int main(int argc, char* argv[]){
                 do{
                     printf("How did you do (0-5): ");
                     fflush(stdout);
+                    do{
                     c = getchar();
-                    while(c == ' ' || c == '\t') c = getchar(); //get rid of leading whitespace
+                    }while(c == ' ' || c == '\t'); //get rid of leading whitespace
                     if(c != '\n') while((throwaway = getchar()) != '\n' && throwaway != EOF); //clean up stdin
                     if(c == EOF){
                         end_time = time(NULL);
