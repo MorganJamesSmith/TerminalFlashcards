@@ -84,12 +84,13 @@ int main(int argc, char* argv[]){
 
     start_time = time(NULL);
 
+    srand(time(NULL));
     char c = '\n';
     int throwaway;
     int repeat = 0;
     int today = ((unsigned long)time(NULL))/86400; //unix time in days
     int increment;
-    int i = 0;
+    int i = rand()%loadedFlashcards;
     do{
 
         do{
@@ -99,7 +100,7 @@ int main(int argc, char* argv[]){
         repeat = 0;
         for(int k = 0; k < loadedFlashcards; k++){
             i += increment;
-            if(i > loadedFlashcards)
+            if(i >= loadedFlashcards)
                 i -= loadedFlashcards;
             if(flashcards[i].dueDay <= today){
                 printf("%s\n",flashcards[i].front);
@@ -117,8 +118,8 @@ int main(int argc, char* argv[]){
                     do{
                     c = getchar();
                     }while(c == ' ' || c == '\t'); //get rid of leading whitespace
-                    if(c != '\n') while((throwaway = getchar()) != '\n' && throwaway != EOF); //clean up stdin
-                    if(c == EOF){
+                    if(c != '\n' && c != (char) EOF) while((throwaway = getchar()) != '\n' && throwaway != EOF); //clean up stdin
+                    if(c == (char) EOF || throwaway == EOF){
                         end_time = time(NULL);
                         print_user_stats(start_time, end_time, score_histogram);
                         save_and_quit(argv[1],flashcards,loadedFlashcards);
