@@ -48,21 +48,41 @@ void print_user_stats(time_t start, time_t end, int score_histogram[]){
     for(int i = 0; i < 6; i++){
         printf("You answered %d question(s) with a score of %d!\n",score_histogram[i],i);
     }
-
-
 }
 
 int main(int argc, char* argv[]){
+    char * import_file,* export_file,* review_file;
+    int opt;
+    while ((opt = getopt(argc, argv, "i:o:d:")) != -1) {
+        switch (opt) {
+            case 'i':
+                import_file = optarg;
+                break;
+            case 'o':
+                export_file = optarg;
+                break;
+            case 'd':
+                review_file = optarg;
+                break;
+            default:
+                fprintf(stderr, "Usage %s [-i input.csv] [-o output.csv] [-d] review.gdbm\n",argv[0]);
+                exit(EXIT_FAILURE);
+        }
+    }
 
-    if(argc != 2){
-        fprintf(stderr,"ERROR: no file specified\n");
+    if(argc-optind == 1)
+        review_file = argv[optind];
+
+    if(!review_file){
+        fprintf(stderr, "Usage %s [-i input.csv] [-o output.csv] -d review.gdbm\n",argv[0]);
         exit(EXIT_FAILURE);
     }
+
 
     FILE * cards;
     time_t start_time, end_time;
     int score_histogram[] = {0,0,0,0,0,0};
-    cards = fopen(argv[1], "r");
+    cards = fopen(review_file, "r");
     if (cards == NULL){
         fprintf(stderr,"ERROR: Could not open file %s\n",argv[1]);
         exit(EXIT_FAILURE);
