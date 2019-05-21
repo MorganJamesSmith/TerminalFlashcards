@@ -2,43 +2,8 @@
 #include <string.h>
 #include <stdio.h>
 #include <inttypes.h>
-#include "flashcard.h"
 #include "csvparser.h"
 
-int csv_to_flashcard(FILE *csv, struct flashcard flashcards[], int flashcardsToLoad){
-
-    char * line; //Stores the line currently being read
-    char **lineItems; //parsed line into a list of strings
-    size_t len = 0;
-    ssize_t readline; //The length of string returned
-    int loadedFlashcards = 0; // the number of flashcards loaded
-
-
-    while ((( readline = getline(&line, &len, csv)) != -1) && (loadedFlashcards < flashcardsToLoad)){
-        struct flashcard flash;
-        lineItems = parse_csv(line);
-        if(lineItems == NULL){
-            fprintf(stderr, "ERROR: couldn't parse line:\n%s\n",line);
-            continue;
-        }
-        flash.front = lineItems[0];
-        flash.back = lineItems[1];
-        flash.repetitions = strtoumax(lineItems[2], NULL, 10);
-        free(lineItems[2]);
-        flash.easinessFactor = strtof(lineItems[3], NULL);
-        free(lineItems[3]);
-        flash.dueDay = strtoumax(lineItems[4], NULL, 10);
-        free(lineItems[4]);
-        flashcards[loadedFlashcards] = flash;
-        loadedFlashcards++;
-    }
-    if(loadedFlashcards == 0){
-            fprintf(stderr,"ERROR: file is empty\n");
-            exit(EXIT_FAILURE);
-    }
-    free(line);
-    return loadedFlashcards;
-}
 void free_csv_line(char **parsed)
 {
     char **ptr;
